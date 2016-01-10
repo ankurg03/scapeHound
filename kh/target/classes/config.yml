@@ -1,0 +1,51 @@
+dbUrl: "jdbc:mysql://localhost:3306/sh"
+dbUser: root
+dbPassword: ""
+server:
+  adminMinThreads: 8
+  adminMaxThreads: 8
+  minThreads: 200
+  maxThreads: 200
+  applicationConnectors:
+    - type: http
+      port: 28223
+      acceptorThreads: 1
+      selectorThreads: 1
+  adminConnectors:
+     - type: http
+       port: 28224
+       acceptorThreads: 1
+       selectorThreads: 1
+  gzip:
+    enabled: false
+  requestLog:
+      appenders:
+        - type: console
+        - type: file
+          archive: false
+          currentLogFilename: /var/log/flipkart/fdp-bulk-migration/dart-schema-migration-access.log
+          archivedLogFilenamePattern: /var/log/flipkart/fdp-bulk-migration/dart-schema-migration-access-%d.log
+          timeZone: Asia/Kolkata
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.example.app' to DEBUG.
+    com.example.app: DEBUG
+
+  appenders:
+    - type: console
+    - type: file
+      threshold: INFO
+      logFormat: "%-6level [%d{HH:mm:ss.SSS}] [%t] %logger{5} - %X{code} %msg %n"
+      currentLogFilename: /var/log/flipkart/fdp-bulk-migration/dart-schema-migration-service.log
+      archivedLogFilenamePattern: /var/log/flipkart/fdp-bulk-migration/dart-schema-migration-service-%d{yyyy-MM-dd}-%i.log.gz
+      archivedFileCount: 7
+      timeZone: UTC
+      maxFileSize: 10MB
+
